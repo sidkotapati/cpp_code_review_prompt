@@ -16,7 +16,7 @@ Specific Review Criteria:
 2. Noexcept Guarantees: Check if functions are guaranteed not to throw. If so, they should be marked `noexcept`.
 3. Pointer safety: Look for **any** dereferenced pointers. If there is no preceding `nullptr` check, flag it immediately as a critical error.
 4. Readability & DRY: Flag duplicate code. Ensure documentation explains the _why_, and not just the _what_. Flag opportunities to consolidate.
-5. Naming: Ensure function names are descriptive, consistent, and typo-free.
+5. Naming: Ensure function names and variable names are descriptive, consistent, and typo-free (use the Google Style Guide as a reference for this).
   - Use naming convention of all uppercase letters to differentiate static const variables from others, ex: UNAVAILABLE_ALERTS.
   - Avoid magic numbers, constants should either use the all uppercase format, or the Google Style Guide Recommendation ex. kProbabilityThreshold.
 6. Add C++ attributes where appropriate and useful. Most functions that have return values should be default [[nodiscard]].
