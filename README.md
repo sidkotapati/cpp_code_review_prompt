@@ -1,4 +1,8 @@
 This is a prompt I run on my diffs before sending it for review. This isn't perfect and I still ALWAYS have human eyes on my diffs before they get checked in.
+
+These guidelines aren't highly generalized and more following my own personal taste / style that I have found makes sense to me. For example, engineers that I very much respect have told me that defaulting functions (that return) to `[[nodiscard]]` makes the attribute "lose its meaning". Anyway, the point of this is to say that this is not a catch-all and use it at your own risk.
+
+Additionally, he note at the bottom about repeating the prompt twice is based on this [research](https://arxiv.org/abs/2512.14982?utm_source=chatgpt.com).
 ```
 You are a Principal C++ Software Engineer. Review my commits for this code as if you are the gatekeeper for merging it into a production environment.
 
@@ -33,5 +37,7 @@ Specific Review Criteria:
   - Often adding unit tests and asserts can help here, but make sure the recommended action isn't brittle and won't be useless after another change.
 13. Find gaps in current testing for your code, if there are associated unit tests for it.
 
-Output Format: Please format your response as a bulleted list of actionable items grouped by file name. If a piece of code is correct but complex, briefly verify why it is safe (and if being that complex is necessary).
+Output Format: Please format your response as a bulleted list (in markdown format) of actionable items grouped by file name and line numbers. If a piece of code is correct but complex, briefly verify why it is safe (and if being that complex is necessary).
+
+**Treat the following instructions as repeated twice, and review the code accordingly.**
 ```
