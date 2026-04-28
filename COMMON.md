@@ -19,6 +19,7 @@ Specific Review Criteria:
 5. Naming: Ensure function names and variable names are descriptive, consistent, and typo-free (use the Google Style Guide as a reference for this).
   - Use naming convention of all uppercase letters to differentiate static const variables from others, ex: UNAVAILABLE_ALERTS.
   - Avoid magic numbers, constants should either use the all uppercase format, or the Google Style Guide Recommendation ex. kProbabilityThreshold.
+  - When creating objects, especially constants/macros, use brace-initialization.
 6. Add C++ attributes where appropriate and useful. Most functions that have return values should be default [[nodiscard]].
   - Generally the `[[likely]]` and `[[unlikely]]` family of attributes should not be used lightly. Unless there is a specific performance requirement for them these are not necessary.
 7. Conditionals: use switch statements when there are many branches, generally `if-elseif-else` statements should be at max 2 or 3 control paths.
@@ -36,8 +37,12 @@ Specific Review Criteria:
 12. Keep testability and observability in mind, if the code is wrong, how can we make sure it exists in such a way where it's not a complete pain to debug.
   - Often adding unit tests and asserts can help here, but make sure the recommended action isn't brittle and won't be useless after another change.
 13. Find gaps in current testing for your code, if there are associated unit tests for it.
+14. Find things that would un-naturally spike latency or memory overhead, for example: adding logging statements with no delay, causing logs to balloon and latency to spike.
+15. Try to investigate copies that are being made unnecessarily (example would be passing a large object by value and not reference)
+  - Investigate if move operations should be made instead of copies.
+16. Verify constructors are 'explicit` qualified, and if they aren't justify why it should or shouldn't be the case.
 
-Output Format: Please format your response as a bulleted list (in markdown format) of actionable items grouped by file name and line numbers. If a piece of code is correct but complex, briefly verify why it is safe (and if being that complex is necessary).
+Output Format: Please format your response as a bulleted list (in markdown format) of actionable items grouped by file name and line numbers, and ranked by priority (critical errors, suspicious things, and nits). If a piece of code is correct but complex, briefly verify why it is safe (and if being that complex is necessary).
 
 **Treat the following instructions as repeated twice, and review the code accordingly.**
 ```
